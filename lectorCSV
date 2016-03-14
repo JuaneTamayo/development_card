@@ -1,0 +1,26 @@
+# De input se utiliza un documento .CVS de tres columnas: Zona, No. de Lugar, y Disponibilidad
+#Regresa el numero de espacios ocupados de cada zona y el promedio de este
+
+#En caso de que las columnas esten en otro orden, se pueden cambiar las siguientes variables para adaptar el programa
+disp = 2
+zone = 0
+
+values = []
+diff = 1
+with open('Estacionamiento.csv', 'r') as csv:
+    for line in csv.readlines():
+        elements = line.strip().split(',')
+        if diff != int(elements[zone]):
+            csum = sum(values)
+            cavg = sum(values)/len(values)
+            print("Espacios ocupados en la zona %d: %d" % (diff, csum))
+            print("Promedio de espacios ocupados en la zona %d: %f" % (diff, cavg))
+            print()
+            values = []
+            diff = int(elements[zone])
+        values.append(int(elements[disp]))
+
+csum = sum(values)
+cavg = sum(values)/len(values)
+print("Espacios ocupados en la zona %d: %d" % (diff, csum))
+print("Promedio de espacios ocupados en la zona %d: %f" % (diff, cavg))
